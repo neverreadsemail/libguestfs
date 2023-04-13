@@ -49,6 +49,11 @@
 #include "guestfs_protocol.h"
 #include "qemuopts.h"
 
+#if defined __APPLE__ && defined __MACH__
+#include <crt_externs.h>
+#define environ (*_NSGetEnviron ())
+#endif /* __APPLE__ */
+
 /* Per-handle data. */
 struct backend_direct_data {
   pid_t pid;                    /* Qemu PID. */

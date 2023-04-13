@@ -103,6 +103,12 @@
 #include "guestfs.h"
 #include "guestfs-internal.h"
 
+
+#if defined __APPLE__ && defined __MACH__
+#include <crt_externs.h>
+#define environ (*_NSGetEnviron ())
+#endif /* __APPLE__ */
+
 enum command_style {
   COMMAND_STYLE_NOT_SELECTED = 0,
   COMMAND_STYLE_EXECV = 1,
